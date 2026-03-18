@@ -1,7 +1,9 @@
+#Listas que simulam as caixas e peças.
 pecas = []
 caixas = []
 caixa_atual = []
 
+#Função de avaliação dentro dos critérios impostos.
 def avaliar_peca(peso, cor, comprimento):
     motivos = []
     if not (95 <= peso <= 105):
@@ -11,7 +13,8 @@ def avaliar_peca(peso, cor, comprimento):
     if not (10 <= comprimento <= 20):
         motivos.append("Comprimento fora do intervalo (10cm a 20cm)")
     return motivos
-
+    
+#Função de cadastrar uma peça
 def cadastrar_peca():
     id_peca = len(pecas) + 1
     peso = float(input("Peso (g): "))
@@ -21,6 +24,7 @@ def cadastrar_peca():
     motivos = avaliar_peca(peso, cor, comprimento)
     aprovada = len(motivos) == 0
 
+    #Dicionário que é utilizado como banco de dados temporário
     peca = {"id": id_peca, "peso": peso, "cor": cor, "comprimento": comprimento,
             "aprovada": aprovada, "motivos": motivos}
     pecas.append(peca)
@@ -36,7 +40,8 @@ def cadastrar_peca():
         print(f"Peca {id_peca} REPROVADA:")
         for m in motivos:
             print(f"  - {m}")
-
+            
+#Função de listar as peças
 def listar_pecas():
     if not pecas:
         print("Nenhuma peca cadastrada.")
@@ -48,6 +53,7 @@ def listar_pecas():
             for m in p["motivos"]:
                 print(f"  - {m}")
 
+#Função de remover as peças.
 def remover_peca():
     id_remover = int(input("ID da peca a remover: "))
     for p in pecas:
@@ -59,12 +65,16 @@ def remover_peca():
             return
     print("Peca nao encontrada.")
 
+#Função de listar as caixas
 def listar_caixas():
     if not caixas:
         print("Nenhuma caixa fechada ainda.")
     for i, c in enumerate(caixas, 1):
         print(f"Caixa {i}: {c}")
     print(f"Caixa em aberto: {caixa_atual} ({len(caixa_atual)}/10 pecas)")
+
+
+#Função de gerar o relatório.
 
 def relatorio():
     aprovadas = [p for p in pecas if p["aprovada"]]
@@ -82,6 +92,8 @@ def relatorio():
         for p in reprovadas:
             print(f"  ID {p['id']}: {', '.join(p['motivos'])}")
 
+
+#Menu de opção que chama as funções
 while True:
     print("\n1. Cadastrar nova peca")
     print("2. Listar pecas")

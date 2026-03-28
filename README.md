@@ -125,5 +125,5 @@ Motivos de reprovacao:
 
 ## Autor
 Wendel Ferreira
-Trabalho de Faculdade — Automação Digital
+Trabalho de Faculdade — Março
 Unifecaf — 2026
